@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MyMovieController!{% endblock %}
+
+{% block body %}
+    {% include 'my_movie/_edit_movie_modal.html.twig' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                {% if movie.file is not null %}
+                    <img src="/uploads/movie/{{ movie.file }}" alt="Movie poster" class="rounded img-fluid">
+                {% else %}
+                    <img src="{{ getImageUrl(movie.posterPath) }}" alt="Movie poster" class="rounded img-fluid">
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <div class="d-flex justify-content-between">
+                    <h1>{{ movie.name }}</h1>
+                    <a href="{{ path('app_movie_change_see', {id: movie.id}) }}">
+                        {% if movie.see %}
+                            <i class="fas fa-eye text-dark"></i>
+                        {% else %}
+                            <i class="fas fa-eye-slash text-dark"></i>
+                        {% endif %}
+                    </a>
+                    <button class="btn " data-toggle="modal" data-target="#movieModal">
+                        Modifier
+                    </button>
+                </div>
+
+                <p> {{ movie.dateRelease|date('y/m/d') }}</p>
+                <p>{{ movie.type }}</p>
+                <p>{{ movie.realisator }}</p>
+                <p>{{ movie.synopsis }}</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

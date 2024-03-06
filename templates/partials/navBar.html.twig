@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+    <a class="navbar-brand" alt="Logo" href="{{ path('app_home') }}"><img src="{{ asset('img/logo.png') }}" alt="Logo" width="75"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('app_my_movie') }}">Mes Films</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('app_see_movie') }}">Mes Films vue</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('app_to_see_movie') }}">Mes Films à voirs</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            {% if app.user is null %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_registration') }}">Créer son compte</a>
+                </li>
+            {% endif %}
+            {% if app.user is not null %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_account', {id: app.user.id}) }}">Mon compte</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_logout')}}">Déconnexion</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

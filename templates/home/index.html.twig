@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div {{ stimulus_controller('movie') }}>
+    <input
+            type="search"
+            class="form-control"
+            id="search"
+            placeholder="Rechercher..."
+            {{ stimulus_action('movie', 'searchMovie', 'input') }}
+            data-url={{ path('app_search_movie') }}
+    >
+    <div id="movies-list"></div>
+</div>
+{% endblock %}

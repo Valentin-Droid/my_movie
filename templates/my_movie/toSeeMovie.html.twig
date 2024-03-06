@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MyMovieController!{% endblock %}
+
+{% block body %}
+    <div {{ stimulus_controller('movie') }}>
+        <input
+                type="search"
+                class="form-control"
+                id="search"
+                placeholder="Rechercher..."
+                {{ stimulus_action('movie', 'searchMovie', 'input') }}
+                data-url={{ path('app_search_movie') }}
+        >
+        <div id="movies-list"></div>
+        <div class="mb-5">
+            <h3 class="font-weight-normal">Mes Films à voir</h3>
+        </div>
+        <div class="row justify-content-center">
+            {% for movie in movies|sort((a, b) => a.name <=> b.name) %}
+                <a href="{{ path('app_movie_details', {id: movie.id}) }}" class="card mb-3 w-25 mx-3 text-dark text-decoration-none">
+                    {% if movie.file is not null %}
+                        <img src="/uploads/movie/{{ movie.file }}" alt="Movie poster" class="rounded img-fluid">
+                    {% else %}
+                        <img src="{{ getImageUrl(movie.posterPath) }}" alt="Movie poster" class="rounded img-fluid">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ movie.name }}</h5>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre Compte !{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-column align-items-center">
+        <h3 class="font-weight-normal">Mon Compte</h3>
+        <div class="d-flex flex-row w-100">
+            <div class="m-auto w-50">
+                {{ form_start(userForm) }}
+
+                {{ form_row(userForm.firstName) }}
+                {{ form_row(userForm.lastName) }}
+                {{ form_row(userForm.email) }}
+
+                {{ form_end(userForm) }}
+            </div>
+            <div class="m-auto w-50">
+                {{ form_start(passwordForm) }}
+
+                {{ form_row(passwordForm.password) }}
+
+                {{ form_end(passwordForm) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
